@@ -1,0 +1,71 @@
+// go to backend
+// npm init and enter all 
+
+// PS D:\oneCart\backend> npm i express
+// PS D:\oneCart\backend> npm i mongoose
+// PS D:\oneCart\backend> npm i nodemon
+// PS D:\oneCart\backend> npm i bcryptjs
+// PS D:\oneCart\backend> npm i cors         {make connection b/w frontend and backend}
+// PS D:\oneCart\backend> npm i dotenv
+// PS D:\oneCart\backend> npm i jsonwebtoken
+// PS D:\oneCart\backend> npm i cookie-parser
+
+// npm i mongoose express nodemon bcryptjs cors dotenv jsonwebtoken cookie-parser
+
+// add this in [package.json] {"type": "module"}, for import any package and hume require krne ki zaroot nahi hogi import kr skte hain abb.
+// add this after author.
+
+// script ke andr jo test hain usme likhenge nodemon index.js {package.json main} {"test": "echo \"Error: no test specified\" && exit 1"}  ------->{"dev": "nodemon index.js"}
+ 
+// //  {
+    // First backend setup in index.js
+
+// // import express from 'express'
+// // import dotenv from 'dotenv'
+
+// // dotenv.config()
+
+// // let port = process.env.PORT || 6000;
+
+// // let app = express();
+
+// // app.get("/",(req,res)=>{
+// //     res.send("Hello from server");
+// // });
+
+// // app.listen(port,()=>{
+// //     console.log("Hello from server");
+    
+// // })
+
+// // }
+
+/* 
+create config folder->db.js , mongodb atlas connect krne ke lie backend se
+import mongoose from 'mongoose'
+
+const connectDb = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URL)
+        console.log("DB Connected")
+    } catch (error) {
+        console.log("DB Error");
+        
+    }
+}
+
+export default connectDb;
+
+
+
+create userModel.js in model folder for storeing user info
+->in this file schema create krenge mongoose se user ke lie
+
+
+create authController.js in controller folder and install validator package ,jiski help se email ko validate krenge.
+
+
+create token.js in config for jwt authentication token jwt ka use krenge token gnerate krne ke lie.
+
+
+*/
