@@ -68,4 +68,6 @@ create authController.js in controller folder and install validator package ,jis
 create token.js in config for jwt authentication token jwt ka use krenge token gnerate krne ke lie.
 
 
+axios package frontend se backend ko connect krne ke lie hota hian so
+i axios  = npm i axios
 */
