@@ -6,7 +6,7 @@ import authRoutes from './routes/authRoutes.js';
 import cors from "cors"
 dotenv.config()
 
-let port = process.env.PORT || 6000;
+const port = process.env.PORT;
 
 let app = express();
 

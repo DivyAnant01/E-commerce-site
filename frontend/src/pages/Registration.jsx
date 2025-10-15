@@ -9,7 +9,7 @@ import { IoEye } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
 import { authDataContext } from '../context/authContext';
-
+import axios from 'axios';
 
 function Registration() {
   let [show, setShow] = useState(false);
@@ -25,9 +25,12 @@ function Registration() {
   const handleSignup = async (e) => {
     e.preventDefault()
     try {
-
+      const result = await axios.post(serverUrl + '/api/auth/registration', {
+        name, email, password
+      }, { withCredentials: true })
+      console.log(result.data)
     } catch (error) {
-
+      console.log(error)
     }
   }
 
@@ -44,6 +47,7 @@ function Registration() {
       </div>
 
       <div className="max-w-[600px] w-[90%] h-[500px] bg-[#00000025] border-[1px] border-[#96969635] backdrop-blur-2xl rounded-lg shadow-lg flex items-center justify-center">
+        {/* form */}
         <form action="" onSubmit={handleSignup} className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-[20px]">
 
           {/* Google Button */}
