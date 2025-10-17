@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Logo from '../assets/logo.png'
 import google from '../assets/google.png'
 import { IoEyeOutline } from "react-icons/io5";
@@ -7,10 +7,24 @@ import { IoEye } from "react-icons/io5";
 
 
 import { useNavigate } from 'react-router-dom'
+import { authDataContext } from '../context/authContext';
 
 function Login() {
   let [show, setShow] = useState(false);
+  let [email, setEmail] = useState("")
+  let [password, setPassword] = useState("")
+  let {ServerUrl}=useContext(authDataContext)
+
   let navigate = useNavigate()
+
+  const handleLogin=async (e) => {
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
+
   return (
     <div className="w-[100vw] h-[120vh] bg-gradient-to-l from-[#141414] to-[#0c2025] text-white flex flex-col items-center justify-start">
       <div className='w-[100%] h-[80px] flex items-center justify-start px-[30px] gap-[10px] cursor-pointer' onClick={() => navigate("/")}>
