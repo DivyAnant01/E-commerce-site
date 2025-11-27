@@ -1,21 +1,19 @@
-import React from 'react'
-import { createContext } from 'react'
+import React, { createContext } from "react";
 
+export const authDataContext = createContext();
 
-export const authDataContext = createContext()
 function authContext({ children }) {
-    let serverUrl="http://localhost:8000"
-    let value = {
-        serverUrl
-    }
+  let serverUrl = "http://localhost:8000";
 
-    return (
-        <div>
-            <authDataContext.Provider value={value}>
-                {children}
-            </authDataContext.Provider>
-        </div>
-    )
+  let value = {
+    serverUrl,
+  };
+
+  return (
+    <authDataContext.Provider value={value}>
+      {children}
+    </authDataContext.Provider>
+  );
 }
 
 export default authContext;

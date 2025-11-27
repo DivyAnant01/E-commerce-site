@@ -12,6 +12,7 @@ import { authDataContext } from '../context/authContext';
 import axios from 'axios';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../utils/Firebase';
+import { userDataContext } from '../context/UserContext';
 
 function Registration() {
   let [show, setShow] = useState(false);
@@ -19,6 +20,7 @@ function Registration() {
   let [name, setName] = useState("")
   let [email, setEmail] = useState("")
   let [password, setPassword] = useState("")
+  let { userdata, getCurrentUser } = useContext(userDataContext)
 
 
 
@@ -30,7 +32,10 @@ function Registration() {
       const result = await axios.post(serverUrl + '/api/auth/registration', {
         name, email, password
       }, { withCredentials: true })
+      getCurrentUser()
+      navigate("/")
       console.log(result.data)
+
     } catch (error) {
       console.log(error)
     }
@@ -39,13 +44,15 @@ function Registration() {
   const googleSignup = async () => {
     try {
       const response = await signInWithPopup(auth, provider)
-      let user =response.user;
-      let name=user.displayName;
-      let email=user.email;
+      let user = response.user;
+      let name = user.displayName;
+      let email = user.email;
 
-      const result=await axios.post(serverUrl + "/api/auth/googlelogin",{name,email},{withCredentials:true})
+      const result = await axios.post(serverUrl + "/api/auth/googlelogin", { name, email }, { withCredentials: true })
       console.log(result.data);
-      
+      getCurrentUser()
+      navigate("/")
+
     } catch (error) {
       console.log(error)
     }

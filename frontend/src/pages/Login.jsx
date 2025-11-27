@@ -11,41 +11,49 @@ import { auth, provider } from '../../utils/Firebase';
 
 import { useNavigate } from 'react-router-dom'
 import { authDataContext } from '../context/authContext';
+import { userDataContext } from '../context/UserContext';
 
 function Login() {
   let [show, setShow] = useState(false);
-  let [email, setEmail] = useState("")
-  let [password, setPassword] = useState("")
-  let { ServerUrl } = useContext(authDataContext)
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+  let { serverUrl } = useContext(authDataContext);
+  let { getCurrentUser } = useContext(userDataContext)
+
 
   let navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      let result =await axios.post(ServerUrl+'/api/auth/login',{
-        email,password
-      },{withCredentials:true})
+      let result = await axios.post(serverUrl + '/api/auth/login', {
+        email, password
+      }, { withCredentials: true })
       console.log(result.data)
+      getCurrentUser()
+      navigate("/")
+
     } catch (error) {
       console.log(error)
     }
   }
 
   const googlelogin = async () => {
-      try {
-        const response = await signInWithPopup(auth, provider)
-        let user =response.user;
-        let name=user.displayName;
-        let email=user.email;
-  
-        const result=await axios.post(ServerUrl + "/api/auth/googlelogin",{name,email},{withCredentials:true})
-        console.log(result.data);
-        
-      } catch (error) {
-        console.log(error)
-      }
+    try {
+      const response = await signInWithPopup(auth, provider)
+      let user = response.user;
+      let name = user.displayName;
+      let email = user.email;
+
+      const result = await axios.post(serverUrl + "/api/auth/googlelogin", { name, email }, { withCredentials: true })
+      console.log(result.data);
+      getCurrentUser()
+      navigate("/")
+
+    } catch (error) {
+      console.log(error)
     }
+  }
 
   return (
     <div className="w-[100vw] h-[120vh] bg-gradient-to-l from-[#141414] to-[#0c2025] text-white flex flex-col items-center justify-start">

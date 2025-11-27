@@ -1,43 +1,48 @@
-import React, { createContext, useEffect, useState } from 'react'
-import { useContext } from 'react';
-import { authDataContext } from './authContext';
-import axios from 'axios'
+import React, { createContext, useEffect, useState, useContext } from 'react';
+import { authDataContext } from './AuthContext';
+import axios from 'axios';
 
-export const userDataContext = createContext()
-function UserContext({ childern }) {
+export const userDataContext = createContext();
 
-    let [userData, setUserData] = useState("");
-    let { serverUrl } = useContext(authDataContext)
+function UserContext({ children }) {
 
-    const getCurrentUser = async () => {
-        try {
+  const [userData, setUserData] = useState(null);
+  const { serverUrl } = useContext(authDataContext);
 
-            let result = await axios.post(serverUrl + "/api/user/getcurrentuser", { withCredential: true });
-            setUserData(result.data)
-
-        } catch (error) {
-            setUserData(null)
-            console.log(error)
+  const getCurrentUser = async () => {
+    try {
+      const result = await axios.get(
+        serverUrl + "/api/user/getcurrentuser",
+        {
+          withCredentials: true
         }
+      );
+
+      setUserData(result.data);
+      console.log("User:", result.data);
+
+    } catch (error) {
+      // console.log("Error fetching user:", error);
+      setUserData(null);
     }
+  };
 
-    useEffect(()=>{
-        getCurrentUser()
-    },[])
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
-    let value = {
-        userData,setUserData,getCurrentUser
-    }
+  const value = {
+    userData,
+    setUserData,
+    getCurrentUser
+  };
 
-
-    return (
-        <div>
-            <userDataContext.Provider value={value}>
-                {childern}
-            </userDataContext.Provider>
-        </div>
-    )
+  return (
+    <userDataContext.Provider value={value}>
+      {children}
+    </userDataContext.Provider>
+  );
 }
 
-
-export default UserContext
+export default UserContext;
+ 
