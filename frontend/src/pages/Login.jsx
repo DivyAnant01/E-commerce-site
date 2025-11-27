@@ -10,7 +10,7 @@ import { auth, provider } from '../../utils/Firebase';
 
 
 import { useNavigate } from 'react-router-dom'
-import { authDataContext } from '../context/authContext';
+import { authDataContext } from '../context/AuthContext';
 import { userDataContext } from '../context/UserContext';
 
 function Login() {

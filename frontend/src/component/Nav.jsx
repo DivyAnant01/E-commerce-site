@@ -8,7 +8,7 @@ import { useContext } from 'react';
 import { userDataContext } from '../context/UserContext';
 import { IoSearchCircleSharp } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom'
-import { authDataContext } from '../context/authContext';
+import { authDataContext } from '../context/AuthContext';
 import axios from 'axios';
 
 
